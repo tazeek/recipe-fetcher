@@ -8,6 +8,8 @@ function scrapeVernaBanana() {
 
     // Get the collection squares
     squares_classname = ".food-recipe_container";
+
+    // TODO: Can we do the same with getElementsbyID
     recipe_obj = document.querySelectorAll(squares_classname);
 
     let recipe_metadata = [];
@@ -20,9 +22,12 @@ function scrapeVernaBanana() {
         recipe_metadata.push({title, web_link});
     });
 
-    console.log(recipe_metadata);
-
     // Sort by alphabetical order
+    recipe_metadata.sort((a,b) => 
+        a.title.toLowerCase().localeCompare(b.title.toLowerCase())
+    )
+
+    console.log(recipe_metadata)
 
     // Copy to clipboard
 
