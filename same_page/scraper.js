@@ -7,17 +7,21 @@ function scrapeVernaBanana() {
     home_page = "https://www.vernabanana.com/recipes"
 
     // Get the collection squares
-    squares_classname = "food-recipe_container w-dyn-item";
-    recipe_obj = document.getElementsByClassName(squares_classname);
+    squares_classname = ".food-recipe_container";
+    recipe_obj = document.querySelectorAll(squares_classname);
 
-    // Go one by one
-    for (i = 0; i < recipe_obj.length; i++) {
-    
-        // Extract the title
+    let recipe_metadata = [];
 
-        // Extract the web link
-        web_link = home_page + recipe_obj[i].getElementsByTagName('a')[0].getAttribute("href");
-    }
+    recipe_obj.forEach(el => {
+
+        let title = el.querySelector('.recipe-list-card_heading text-clamp').innerText;
+        let web_link = home_page + el.querySelector('a').getAttribute("href");
+
+        console.log(title);
+        //recipe_metadata.push({title, web_link});
+    });
+
+    //console.log(recipe_metadata);
 
     // Sort by alphabetical order
 
