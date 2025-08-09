@@ -2,6 +2,30 @@
 
 // Paste into console within the web page
 
+function escapeForSheets(text) {
+  // Replace any double quotes with two double quotes (Sheets escaping rule)
+  return text.replace(/"/g, '""');
+}
+
+function prepareOutput(recipe_metadata) {
+    // Sort by alphabetical order
+    recipe_metadata.sort((a,b) => 
+        a.title.toLowerCase().localeCompare(b.title.toLowerCase())
+    )
+    
+    // Prepare the final string
+    let combined_output = recipe_metadata.map(
+        recipe => {
+        let title = escapeForSheets(recipe.title);
+        let web_link = escapeForSheets(recipe.web_link);
+        return `=HYPERLINK("${web_link}", "${title}")`
+
+    }).join("\n");
+
+    // Copy to clipboard
+    copy(combined_output)
+}
+
 function scrapeVernaBanana() {
     //Link: https://www.vernabanana.com/recipes
     home_page = "https://www.vernabanana.com"
@@ -20,17 +44,6 @@ function scrapeVernaBanana() {
         recipe_metadata.push({title, web_link});
     });
 
-    // Sort by alphabetical order
-    recipe_metadata.sort((a,b) => 
-        a.title.toLowerCase().localeCompare(b.title.toLowerCase())
-    )
+    return  prepareOutput(recipe_metadata) 
     
-    // Prepare the final string
-    let combined_output = recipe_metadata.map(
-        recipe => `${recipe.title}\t${recipe.web_link}`
-    ).join("\n");
-
-    // Copy to clipboard
-    copy(combined_output)
-
 }
