@@ -47,3 +47,26 @@ function scrapeVernaBanana() {
     return  prepareOutput(recipe_metadata) 
     
 }
+
+function scrapeCardamomAndDill() {
+    // Link: https://cardamomanddill.com/recipes/
+
+    // Prepare the JSON list
+    let recipe_metadata = [];
+
+    // Get the collection links
+    [...document.getElementsByTagName('p')].slice(2)
+    .forEach(p => {
+
+        // Get the links
+        [...document.getElementsByTagName('a')]
+        .forEach(link => {
+            let title = //
+            let web_link = //
+        })
+    })
+
+    return prepareOutput(recipe_metadata)
+}
+
+
