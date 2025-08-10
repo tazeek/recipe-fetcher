@@ -4,7 +4,8 @@
 
 function escapeForSheets(text) {
   // Replace any double quotes with two double quotes (Sheets escaping rule)
-  return text.replace(/"/g, '""');
+  return text.replace(/"/g, '""')
+    .replace(/[\r\n]+/g, '');;
 }
 
 function prepareOutput(recipe_metadata) {
@@ -12,9 +13,25 @@ function prepareOutput(recipe_metadata) {
     recipe_metadata.sort((a,b) => 
         a.title.toLowerCase().localeCompare(b.title.toLowerCase())
     )
+
+    // Removing duplicates
+    let unique = new Set();
+
+    let filtered_recipes = recipe_metadata.filter(recipe => {
+        let title = recipe.title.toLowerCase();
+        
+        // For empty title
+        if (!title) return false;
+
+        // For duplicates
+        if (unique.has(title)) return false;
+
+        unique.add(title);
+        return true;
+    });
     
     // Prepare the final string
-    let combined_output = recipe_metadata.map(
+    let combined_output = filtered_recipes.map(
         recipe => {
         let title = escapeForSheets(recipe.title);
         let web_link = escapeForSheets(recipe.web_link);
@@ -67,8 +84,6 @@ function scrapeCardamomAndDill() {
             recipe_metadata.push({title, web_link})
         });
     });
-
-    console.log(recipe_metadata);
 
     return prepareOutput(recipe_metadata)
 }
