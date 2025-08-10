@@ -59,12 +59,16 @@ function scrapeCardamomAndDill() {
     .forEach(p => {
 
         // Get the links
-        [...document.getElementsByTagName('a')]
+        [...p.getElementsByTagName('a')]
         .forEach(link => {
-            let title = //
-            let web_link = //
-        })
-    })
+            let title = link.innerText;
+            let web_link = link.getAttribute('href');
+
+            recipe_metadata.push({title, web_link})
+        });
+    });
+
+    console.log(recipe_metadata);
 
     return prepareOutput(recipe_metadata)
 }
