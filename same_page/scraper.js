@@ -43,6 +43,29 @@ function prepareOutput(recipe_metadata) {
     copy(combined_output)
 }
 
+function scrapeSassySpoon() {
+
+    // Link: https://asassyspoon.com/browse-recipes/
+
+    // Get the collection squares
+    let recipe_metadata = [];
+
+    class_target = ".item.archive-post"
+    document.querySelectorAll(class_target).forEach(el =>{
+        
+        info_tag = el.getElementsByTagName('a')[0];
+
+        // Get the title and web link
+        let title = info_tag.getAttribute("title");
+        let web_link = info_tag.getAttribute("href");
+
+        recipe_metadata.push({title, web_link});
+    });
+
+    return  prepareOutput(recipe_metadata) 
+
+}
+
 function scrapeVernaBanana() {
     //Link: https://www.vernabanana.com/recipes
     home_page = "https://www.vernabanana.com"
