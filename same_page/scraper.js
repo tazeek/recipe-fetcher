@@ -43,6 +43,25 @@ function prepareOutput(recipe_metadata) {
     copy(combined_output)
 }
 
+function scrapeJeccaChantilly() {
+
+    // Link: https://jeccachantilly.com/recipe-index/
+    let recipe_metadata = []
+
+    // Get the collection squares
+    document.querySelectorAll('.post-title').forEach(el => {
+
+        // Get the title and link
+        let web_link = el.getElementsByTagName('a')[0].getAttribute('href');
+        let title = el.innerText;
+
+        recipe_metadata.push({title, web_link});
+    });
+
+    
+    return  prepareOutput(recipe_metadata) 
+}
+
 function scrapeSassySpoon() {
 
     // Link: https://asassyspoon.com/browse-recipes/
