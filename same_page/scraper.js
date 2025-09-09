@@ -52,7 +52,7 @@ function scrapeJeccaChantilly() {
     document.querySelectorAll('.post-title').forEach(el => {
 
         // Get the title and link
-        let web_link = el.getElementsByTagName('a')[0].getAttribute('href');
+        let web_link = el.getElementsByTagName('a')[0].href;
         let title = el.innerText;
 
         recipe_metadata.push({title, web_link});
@@ -75,8 +75,8 @@ function scrapeSassySpoon() {
         info_tag = el.getElementsByTagName('a')[0];
 
         // Get the title and web link
-        let title = info_tag.getAttribute("title");
-        let web_link = info_tag.getAttribute("href");
+        let title = info_tag.title;
+        let web_link = info_tag.href;
 
         recipe_metadata.push({title, web_link});
     });
@@ -129,5 +129,6 @@ function scrapeCardamomAndDill() {
 
     return prepareOutput(recipe_metadata)
 }
+
 
 
