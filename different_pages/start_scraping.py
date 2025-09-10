@@ -1,7 +1,26 @@
 from scraper import Scraper
+import openpyxl
+
+def save_file(file_name, recipe_set):
+
+    wb = openpyxl.Workbook()
+
+    ws = wb.active
+    ws.title = "Recipes"
+
+    ws.append(["Hyperlink"])
+
+    for name, url in recipe_set:
+        ws.append([f'=HYPERLINK("{url}", "{name}")'])
+    
+    ws.save(f"{file_name}.xlsx")
+
+    return None
 
 # URL link:
 webpage = "https://www.walderwellness.com/recipes/?fwp_paged={}"
+file_name = "walderwellness"
+
 box_tag = ".archive-post.facet-post"
 title_tag = ".title"
 
@@ -15,6 +34,7 @@ curr_recipe_set = set()
 while True:
 
     # Get the page
+    print(f"Scraping done for {curr_num}. Sleeping.....")
     page_soup = recipe_scraper.perform_scraping(webpage.format(curr_num))
 
     # Get the recipes for that page
@@ -26,6 +46,9 @@ while True:
     # Join the recipes
     curr_recipe_set = curr_recipe_set | extracted_recipes
 
+    curr_num += 1
+
 # Save the recipes
-print(curr_recipe_set)
+
+save_file(file_name, curr_recipe_set)
 

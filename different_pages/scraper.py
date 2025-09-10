@@ -17,7 +17,7 @@ class Scraper():
 
         return None
 
-    def _sleep():
+    def _sleep(self):
         time.sleep(random.uniform(2,6))
         return None
 
@@ -28,7 +28,7 @@ class Scraper():
 
         return BeautifulSoup(response.text, "html.parser")
     
-    def start_extraction(page_soup, tag_name_box, title_tag):
+    def start_extraction(self, page_soup, tag_name_box, title_tag):
 
         # Check for recipe tag
         recipe_tags = page_soup.select(tag_name_box)
@@ -47,6 +47,8 @@ class Scraper():
             title = tag.select(title_tag)
 
             recipe_set.add((title[0].text, a_tag.get("href")))
+
+        self._sleep()
 
         return recipe_set
         
