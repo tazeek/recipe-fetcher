@@ -13,16 +13,16 @@ def save_file(file_name, recipe_set):
     for name, url in recipe_set:
         ws.append([f'=HYPERLINK("{url}", "{name}")'])
     
-    ws.save(f"{file_name}.xlsx")
+    wb.save(f"{file_name}.xlsx")
 
     return None
 
 # URL link:
-webpage = "https://www.walderwellness.com/recipes/?fwp_paged={}"
-file_name = "walderwellness"
+webpage = "https://www.recipetineats.com/recipes/?fwp_paged={}"
+file_name = "tineats"
 
-box_tag = ".archive-post.facet-post"
-title_tag = ".title"
+box_tag = ".entry-title"
+title_tag = ".entry-title-link"
 
 # Page number
 curr_num = 1
@@ -49,6 +49,5 @@ while True:
     curr_num += 1
 
 # Save the recipes
-
 save_file(file_name, curr_recipe_set)
 
