@@ -49,6 +49,10 @@ class Scraper():
             # Get the title
             title = tag.select(self._title_tag)
 
+            # Just in case:
+            if (not a_tag) or (not title):
+                break
+
             recipe_set.add((title[0].text, a_tag.get("href")))
 
         self._sleep()

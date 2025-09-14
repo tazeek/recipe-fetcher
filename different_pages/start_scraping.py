@@ -52,13 +52,29 @@ def iterate_pages(scraper, webpage_origin, multiple_pages):
     curr_recipe_set = set()
 
     for page in multiple_pages:
+        print(f"Scraping: {page}.....")
         curr_recipe_set = curr_recipe_set | page_scrape(webpage_origin.format(page, "{}"), scraper)
     
     return curr_recipe_set
 
 # URL link:
-webpage = "https://www.recipetineats.com/recipes/?fwp_paged={}"
-multiple_pages = []
+webpage = "https://sugarspunrun.com/category/{}/page/{}/"
+
+multiple_pages = [
+    'desserts/bars-brownies',
+    'desserts/cake',
+    'desserts/candy',
+    'desserts/cheesecake',
+    'desserts/cookies',
+    'desserts/cupcakes-desserts',
+    'desserts/cookies/gourmet-cookies',
+    'no-bake',
+    'desserts/pies',
+    'breads',
+    'drinks',
+    'savory',
+    'soup'
+]
 
 file_name = "tineats"
 
@@ -67,16 +83,9 @@ args = {
     'title_tag' : ".entry-title-link"
 }
 
-# Page number
-curr_num = 1
-
 # Start!
 recipe_scraper = Scraper(args)
-curr_recipe_set = set()
-
-# Single page vs Multiple page
-if multiple_pages:
-    ...
+curr_recipe_set = iterate_pages(recipe_scraper, webpage, multiple_pages)
 
 # Save the recipes
 save_file(file_name, curr_recipe_set)
