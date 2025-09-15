@@ -68,39 +68,17 @@ def iterate_pages(scraper, webpage_origin, multiple_pages):
 
 # Load yaml file
 config_data = load_yaml_file()
-print(config_data)
-quit()
-
-# URL link:
-webpage = "https://sugarspunrun.com/category/{}/page/{}/"
-
-multiple_pages = [
-    'desserts/bars-brownies',
-    'desserts/cake',
-    'desserts/candy',
-    'desserts/cheesecake',
-    'desserts/cookies',
-    'desserts/cupcakes-desserts',
-    'desserts/cookies/gourmet-cookies',
-    'no-bake',
-    'desserts/pies',
-    'breads',
-    'drinks',
-    'savory',
-    'soup'
-]
-
-file_name = "tineats"
-
-args = {
-    'box_tag' : ".entry-title",
-    'title_tag' : ".entry-title-link"
-}
+website_key = 'tineats'
 
 # Start!
-recipe_scraper = Scraper(args)
+recipe_scraper = Scraper(config_data)
+
+metadata = config_data[website_key]
+webpage = metadata['template']
+multiple_pages = metadata.get('tags', [])
+
 curr_recipe_set = iterate_pages(recipe_scraper, webpage, multiple_pages)
 
 # Save the recipes
-save_file(file_name, curr_recipe_set)
+save_file(website_key, curr_recipe_set)
 
