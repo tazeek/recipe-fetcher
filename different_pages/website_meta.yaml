@@ -1,0 +1,23 @@
+sugarspunrun:
+  template: "https://sugarspunrun.com/category/{}/page/{}/"
+  tags:
+  - 'desserts/bars-brownies'
+  - 'desserts/cake'
+  - 'desserts/candy'
+  - 'desserts/cheesecake'
+  - 'desserts/cookies'
+  - 'desserts/cupcakes-desserts'
+  - 'desserts/cookies/gourmet-cookies'
+  - 'no-bake'
+  - 'desserts/pies'
+  - 'breads'
+  - 'drinks'
+  - 'savory'
+  - 'soup'
+  box_tag: ".entry-title"
+  title_tag: ".entry-title-link"
+
+tineats:
+  template: "https://www.recipetineats.com/recipes/?fwp_paged={}"
+  box_tag: ".entry-title"
+  title_tag: ".entry-title-link"

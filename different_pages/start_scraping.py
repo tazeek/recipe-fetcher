@@ -1,5 +1,14 @@
 from scraper import Scraper
 import openpyxl
+import yaml
+
+def load_yaml_file():
+
+    data = dict()
+    with open("website_meta.yaml", "r") as f:
+        data = yaml.safe_load(f)
+
+    return data
 
 def save_file(file_name, recipe_set):
 
@@ -56,6 +65,11 @@ def iterate_pages(scraper, webpage_origin, multiple_pages):
         curr_recipe_set = curr_recipe_set | page_scrape(webpage_origin.format(page, "{}"), scraper)
     
     return curr_recipe_set
+
+# Load yaml file
+config_data = load_yaml_file()
+print(config_data)
+quit()
 
 # URL link:
 webpage = "https://sugarspunrun.com/category/{}/page/{}/"
