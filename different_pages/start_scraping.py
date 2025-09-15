@@ -37,7 +37,7 @@ def page_scrape(webpage, recipe_scraper):
     while True:
 
         # Get the page
-        print(f"Scraping done for {curr_num}. Sleeping.....")
+        print(f"Scraping started for {curr_num}. Sleeping.....")
         page_soup = recipe_scraper.perform_scraping(webpage.format(curr_num))
 
         # Get the recipes for that page
@@ -68,12 +68,11 @@ def iterate_pages(scraper, webpage_origin, multiple_pages):
 
 # Load yaml file
 config_data = load_yaml_file()
-website_key = 'tineats'
+website_key = 'themediterraneandish'
+metadata = config_data[website_key]
 
 # Start!
-recipe_scraper = Scraper(config_data)
-
-metadata = config_data[website_key]
+recipe_scraper = Scraper(metadata)
 webpage = metadata['template']
 multiple_pages = metadata.get('tags', [])
 

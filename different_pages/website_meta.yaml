@@ -21,3 +21,13 @@ tineats:
   template: "https://www.recipetineats.com/recipes/?fwp_paged={}"
   box_tag: ".entry-title"
   title_tag: ".entry-title-link"
+
+beyondkimchee:
+  template: "https://www.beyondkimchee.com/recipe/?_paged={}"
+  box_tag: ".archive-post"
+  title_tag: ".title"
+
+themediterraneandish:
+  template: "https://www.themediterraneandish.com/the-latest/page/{}/"
+  box_tag: ".post-summary--home-archive"
+  title_tag: ".post-summary__title"
