@@ -31,3 +31,8 @@ themediterraneandish:
   template: "https://www.themediterraneandish.com/the-latest/page/{}/"
   box_tag: ".post-summary--home-archive"
   title_tag: ".post-summary__title"
+
+omnivorecooks:
+  template: https://omnivorescookbook.com/category/recipe/?_paged={}
+  box_tag: ".li-a"
+  title_tag: ".gridtitle"
